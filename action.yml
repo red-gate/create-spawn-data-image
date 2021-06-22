@@ -1,0 +1,36 @@
+name: 'Spawn create data-image action'
+description: 'Create a spawn data image'
+inputs:
+  dataImageYaml:
+    description: 'The data image YAML file to use to create a data-image from'
+    required: true
+  lifetime:
+    description: 'The lifetime of the data image before it is automatically deleted'
+    required: false
+    default: '73h'
+  tags:
+    description: 'The tags to apply to the image (will override those in the YAML, and should be passed as multiple `--tag=<your_tag>` space-separated strings'
+    required: false
+    default: ''
+  teams:
+    description: 'The teams to apply to the image (will override those in the YAML, and should be passed as multiple `--team=<your_team>` space-separated strings'
+    required: false
+    default: ''
+  additionalArgs:
+    description: 'Additional arguments to provide (e.g flags for a command)'
+    required: false
+    default: ''
+
+outputs:
+  dataImageName:
+    description: 'The name of the new data image'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dataImageYaml }}
+    - ${{ inputs.lifetime }}
+    - ${{ inputs.tags }}
+    - ${{ inputs.teams }}
+    - ${{ inputs.additionalArgs }}
