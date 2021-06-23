@@ -1,4 +1,7 @@
-name: 'Spawn create data-image action'
+name: 'Create Spawn Data Image'
+branding:
+  color: purple
+  icon: database
 description: 'Create a spawn data image'
 inputs:
   dataImageYaml:
